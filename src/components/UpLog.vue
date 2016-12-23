@@ -67,60 +67,16 @@
                   <th>详情</th>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td class="suc">成功</td>
+                <tr v-for="log in $store.state.update.logList">
+                  <td>{{log.id}}</td>
+                  <td>{{log.title}}</td>
+                  <td>{{log.time}}</td>
+                  <td>{{log.time}}</td>
+                  <td>{{log.filename}}</td>
+                  <td v-bind:class="{suc:log.oprationr,error:!log.oprationr}">{{log.oprationr?"成功":"失败"}}</td>
                   <td>--</td>
                 </tr>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td class="error">失败</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td>进行中</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td>进行中</td>
-                  <td>--</td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td>进行中</td>
-                  <td><a href="javascript:;" class="view">查看</a></td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>JD sales</td>
-                  <td>2016年9月6日 12:34:50</td>
-                  <td>2016年9月6日</td>
-                  <td>test.xlsx</td>
-                  <td>进行中</td>
-                  <td><a href="javascript:;" class="view">查看</a></td>
-                </tr>
+                
                 </tbody>
               </table>
 
@@ -256,11 +212,21 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
       msg: 'Hello Vue!'
     }
+  },
+  computed:{
+    exname:function(){
+      return '123'
+    }
+  },
+  created(){
+    this.$store.dispatch('getLogList')
   }
 }
 </script>

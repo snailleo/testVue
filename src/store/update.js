@@ -1,4 +1,4 @@
-import demo from '../api/demo'
+import {_products,logList} from '../api/demo'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -8,7 +8,8 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   count: 0,
-  list:['123']
+  list:[],
+  logList:[]
 }
 
 // mutations are operations that actually mutates the state.
@@ -17,8 +18,11 @@ const state = {
 // mutations must be synchronous and can be recorded by plugins
 // for debugging purposes.
 const mutations = {
-  getAll(state){console.log('all')
-    state.list = demo
+  getAll(state){
+    state.list = _products
+  },
+  getLogList(){
+    state.logList = logList;
   },
   increment (state) {
     state.count++
@@ -38,6 +42,7 @@ const actions = {
   increment: ({ commit }) => commit('increment'),
   decrement: ({ commit }) => commit('decrement'),
   getAll: ({ commit }) => commit('getAll'),
+  getLogList: ({ commit }) => commit('getLogList'),
   incrementIfOdd ({ commit, state }) {
     if ((state.count + 1) % 2 === 0) {
       commit('increment')
