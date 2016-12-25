@@ -5,9 +5,12 @@
           <li><i class="shcjl"></i>更新主数据表</li>
           <li class="on"><i class="usermana"></i>查看上传日志</li>
         </ul> -->
+        <my message="hello"></my>
+        <input v-model="putmsg">
+        <my v-bind:msg="putmsg"></my>
         <p class="uplog_tit">
           <span class="on">上传记录</span>
-          <span>下载记录</span>
+          <span v-on:click="ok">下载记录</span>
         </p>
         <div id="wrap">
           <div class="tab_wrap" style="display:block">
@@ -213,11 +216,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import my from './MyComponent'
 
 export default {
   data () {
     return {
-      msg: 'Hello Vue!'
+      msg: 'Hello Vue!',
+      putmsg:''
     }
   },
   computed:{
@@ -225,8 +230,16 @@ export default {
       return '123'
     }
   },
+  components:{
+    my
+  },
   created(){
     this.$store.dispatch('getLogList')
+  },
+  methods:{
+    ok(){
+      console.log(123)
+    }
   }
 }
 </script>
